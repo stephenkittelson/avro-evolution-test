@@ -1,0 +1,10 @@
+{
+    "namespace": "da.envelope",
+    "type": "record",
+    "name": "envelope",
+    "fields": [
+        {"name": "schema_id", "type": "string"},
+        {"name": "name", "type": "string"},
+        {"name": "error_msg", "type": "string", "default": ""}
+    ]
+}
