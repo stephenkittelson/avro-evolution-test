@@ -34,6 +34,26 @@ public class DeserializerTest {
         Assertions.assertEquals("John Doe", deserialized.getName().toString(), "name should match");
     }
 
+    @Test
+    public void deserialize2_v1WithV1_nameMatches() throws IOException {
+        byte[] rawBytes = serializeMessage(v1.da.envelope.envelope.newBuilder()
+                .setSchemaId("mySchema.v1")
+                .setName("John Doe")
+                .build(), v1.da.envelope.envelope.getClassSchema());
+        da.envelope.envelope deserialized = new Deserializer<da.envelope.envelope>().deserialize2(rawBytes);
+        Assertions.assertEquals("John Doe", deserialized.getName().toString(), "name should match");
+    }
+
+    @Test
+    public void deserialize2_v1WithV2_nameMatches() throws IOException {
+        byte[] rawBytes = serializeMessage(v1.da.envelope.envelope.newBuilder()
+                .setSchemaId("mySchema.v1")
+                .setName("John Doe")
+                .build(), v1.da.envelope.envelope.getClassSchema());
+        da.envelope.envelope deserialized = new Deserializer<da.envelope.envelope>().deserialize2(rawBytes);
+        Assertions.assertEquals("John Doe", deserialized.getName().toString(), "name should match");
+    }
+
     public static byte[] serializeMessage(SpecificRecord message, Schema schema) throws IOException {
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         BinaryEncoder encoder = EncoderFactory.get().directBinaryEncoder(outputStream, null);
